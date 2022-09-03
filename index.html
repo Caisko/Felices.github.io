@@ -795,8 +795,9 @@
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
-            <div id="form_alerts"></div>
+           
             <form name="submit-to-google-sheet" action="index.html" id="form" method="post"  role="form" class="">
+              <div id="form_alerts"></div>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -868,14 +869,19 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
             <script>
                 const scriptURL = 'https://script.google.com/macros/s/AKfycbwegfxHVySxqw6np47BMdrRo1RlHOOKWqmYUgOIRyJKCI1twtUW4yqJZaoycWElq4uBAA/exec'
                 const form = document.forms['submit-to-google-sheet'];
+                const newdiv = document.createElement('div');
                   form.addEventListener('submit', e => {
                     e.preventDefault()
                     fetch(scriptURL, { method: 'post', body: new FormData(form)})
-                      .then(response => $("form_alerts").html("<div class = 'alert alert-success' > Message successfully sent! </div>"))
-                      .catch(error => console.error('Error!', error.message))
+                    .then(response => $("#form_alerts").html("<div class='alert alert-success'> Message sent successfully.</div>"))
+                    .catch(error => $("#form_alerts").html("<div class='alert alert-danger'> Message not sent.</div>"))
+                      form.reset();
                   });
             </script>
 
