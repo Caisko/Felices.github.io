@@ -795,6 +795,7 @@
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
+            <div id="form_alerts"></div>
             <form name="submit-to-google-sheet" action="index.html" id="form" method="post"  role="form" class="">
               <div class="row">
                 <div class="col-md-6 form-group">
@@ -873,7 +874,7 @@
                   form.addEventListener('submit', e => {
                     e.preventDefault()
                     fetch(scriptURL, { method: 'post', body: new FormData(form)})
-                      .then(response => console.log('Success!', response))
+                      .then(response => $("form_alerts").html("<div class = 'alert alert-success' > Message successfully sent! </div>"))
                       .catch(error => console.error('Error!', error.message))
                   });
             </script>
